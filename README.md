@@ -1,2 +1,2 @@
-# CopilotAgent-Auto
-This is a repository for use how to create auto ai agent using Copilot Studio.
+# Copilot Studio Agents
+This is a repository for how to create an AI agent using Copilot Studio.
