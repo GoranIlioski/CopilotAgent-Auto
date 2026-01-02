@@ -9,6 +9,22 @@
 Environment: CopilotAgents
 Agent: Create a Word Invitation
 
+КРАТКО УПАТСТВО:
+- Креираш агент
+- Креираш Разговор.
+- Разговорот има внесени варијабли (текст) што ќе се користат за да се креира промт
+- Креираш Flow (Тек). Внатре имаш: Run a promt и Compose
+- Во Run a promt внесуваш влезните параметри и викаш да ти направи output Document. При тоа правиш да тој документ ти е од ворд при тоа на местата кои што треба да се внесуваат варијаблите обавесно се поставува {{nameofvariable}}. Има упатство.
+- Во Compose, правиш формула за да ти врати документ
+outputs('Run_a_prompt')?['body/responsev2/predictionOutput/documentOutput/contentBytes']
+- Во делот Respond to agent, правиш да врати вајл и да врати следата формула (ја ставаш во Binary
+binary(outputs('Run_a_prompt')?['body/responsev2/predictionOutput/documentOutput/contentBytes'])
+- Го внесуваш текот во разговорот и ги внесуваш параметрите
+- последна компонента е Message 
+Правиш да е file и при тоа поврзуваш со тоа што има вратено flow. За име можеш да користиш: 
+     "Your invitation_"&Topic.Personname&".docx"
+
+
 
 Тренер: DamoBird365
 Линк до видео: https://www.youtube.com/watch?v=WJu3OJdiPak
