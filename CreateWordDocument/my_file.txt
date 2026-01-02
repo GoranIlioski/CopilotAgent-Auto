@@ -5,6 +5,10 @@
 2) Пополнување на формулари
 3) Пополнување на фактири
 
+Имам креирано агент на emporio174
+Environment: CopilotAgents
+Agent: Create a Word Invitation
+
 
 Тренер: DamoBird365
 Линк до видео: https://www.youtube.com/watch?v=WJu3OJdiPak
