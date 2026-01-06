@@ -1,0 +1,84 @@
+SALES QUOTE AGENT
+LINK TO VIDEO: https://www.youtube.com/watch?v=g6SsJdbgSeM
+
+General Instructions: 
+When a quote is generated: 
+1. Read the Price list to find the name and list price of each product.
+2. Run a tool Generate new quote
+3. And provide a link to generated quote.
+
+
+(This is given by copilot)
+- Guide users through the process of generating accurate sales quotes based on provided information.
+- Create professional Word documents containing the sales quote details.
+- Ensure all required fields for a sales quote are collected before document creation.
+- Maintain a clear, concise, and user-friendly interaction style.
+- Do not generate or process sensitive or confidential information unless explicitly provided by the user.
+- Only operate in English and do not switch languages.
+- Avoid providing legal, financial, or health advice beyond the scope of sales quoting and document creation.
+- Respond promptly and clearly to user requests related to sales quotes and Word document generation.
+- Do not perform actions outside the defined scope of sales quoting and document creation.
+
+(goal, context, Source, expectation)
+
+VIDEO STEPS
+1- creation of Copilot Studio Agent
+2- Creation of tool --> Agent Flow
+	1) add an input - Text - User Message  in When an agent calls a flow
+	2) Add new action --> Run a prompt
+		
+	Sample data:
+I would like a quote for the customer ABC Company, 123 Cherry Lane, Boston, MA, 90021, Customer number is C1099
+Include the following line items:
+- Product A, 3 units, at $100 per unit = $300 line total
+- Product B, 1 unit, at $75 per unit = $75 line total
+- Product C, 6 units, at $250 per unit = $1500 line total
+
+Quote date is 2026-01-06, Quote number is 9999
+		
+	3) Add a new action --> Create file in one drive
+- one drive folder
+-name: concat(concat('QuoteFile_',rand(1000,9999)),'.docx')
+- File content: Contentbytes
+
+
+	4) add a new action --> Office 365 users --> Get my profile (v2)
+
+	5) add a new action --> Compose
+
+The source:
+https://emporio174-my.sharepoint.com/personal/goran_ilioski_emporio174_onmicrosoft_com/Documents/Microsoft%20Copilot%20Chat%20Files/QuoteFile_6548.docx
+
+new element:
+https://emporio174-my.sharepoint.com/personal/replace(replace(outputs('Get_my_profile_(V2)')?['body/userPrincipalName'],'.','_'),'@','_')/Documents outputs('Create_file')?['body/Path']
+
+	6) Response to Agent
+	Text - Full path --> output from previous step --> encodeUriComponent(outputs('Compose:_full_path'))
+
+Test everything
+
+3- Go to agent and add a new tool, and add new flow
+	* Update description with this: Use this action to generate a quote 
+	* Update User massage description: 
+
+Include the following information in the message passed to the workflow:
+- CustomerNumber (only include if found, follow the pattern C0000)
+- CustomerName
+- Products (table)
+ *Quantity
+ *Description
+ *UnitPrice
+ *LineTotal (computed as quantity multiplied by UnitPrice)
+- Total Amount (computed as the sum of all LineTotals)
+
+4- Ground some knowledge
+- Upload excel document Product list
+- Use this description: Use this knowledge source to get information about products including: Product name, description, category and list price.
+
+5- add a new dataverse table of customers
+
+6- update flow (prompt action to read this dataverse table
+
+7- update instructions
+
+
