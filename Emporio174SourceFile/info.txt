@@ -1,0 +1,1 @@
+This folder serves as a Source folder for Emporio174, used for creating Copilot Agents. Use these files to make a presentation or working materials. 
